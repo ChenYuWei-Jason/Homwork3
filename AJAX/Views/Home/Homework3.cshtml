@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "Homework3";
+}
+
+<h1>Homework3</h1>
+
+<select id="s1"></select>
+<select id="s2"></select>
+<select id="s3"></select>
+
+@section Scripts
+{
+    <script>
+    const City = document.querySelector("#s1");
+    const Districts = document.querySelector("#s2");
+    const Road = document.querySelector("#s3");
+
+        getCity();
+        async function getCity() {
+        const response = await fetch("@Url.Content("~/Api/City")");
+        const datas = await response.json();
+        datas.forEach(function (city) {
+         const opt = new Option(city, city);
+         City.options.add(opt);
+        })
+        await getDistricts();
+    }
+        City.addEventListener("change", getDistricts);
+        Districts.addEventListener("change", getRoad);
+
+            async function getDistricts() {
+            Districts.textContent = "";
+            const selCity = await City.options[City.selectedIndex].value
+            const response = await fetch("@Url.Content("~/Api/Districts")"+`?city=${selCity}`);
+            const datas = await response.json();
+            datas.forEach(function (districts) {
+            const opt = new Option(districts, districts);
+            Districts.options.add(opt);
+            })
+            await getRoad();
+        }
+
+             async function getRoad() {
+             Road.textContent = "";
+             const selDistricts = await Districts.options[Districts.selectedIndex].value
+             const response = await fetch("@Url.Content("~/Api/Roads")" + `?districts=${selDistricts}`);
+             const datas = await response.json();
+             datas.forEach(function (road) {
+                const opt = new Option(road, road);
+                Road.options.add(opt);
+            })
+        }
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+}

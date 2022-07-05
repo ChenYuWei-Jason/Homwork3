@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+<select id="select1">
+</select>
+
+@section Scripts
+{
+<script>
+    const selectCity = document.querySelector('#select1');
+    selectCity.addEventListener('chang', () => {
+        console.log(selectCity.options[selectCity.selectedIndex].value);
+    })
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", () => {
+        const data = JSON.parse(xhr.responseText);
+        console.log(data);
+        data.forEach((City) => {
+            const opt = new Option(City, City);
+            selectCity.options.add(opt);
+        })
+    })
+
+
+    xhr.open("GET", "@Url.Content("~/Api/City")");
+    xhr.send();
+</script>
+
+
+}
+

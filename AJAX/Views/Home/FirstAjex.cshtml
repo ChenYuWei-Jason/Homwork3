@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "FirstAjex";
+}
+
+<h1>FirstAjex</h1>
+<button id="btn1" class=" btn btn-primary">按鈕</button>
+<div id="div1" class="alert-secondary"></div>
+<input trpy="text" id="inputName" placeholder="請輸入姓名">
+<input type="number" id="inputAge" placeholder="請輸入年齡">
+
+@section Scripts
+{
+<script>
+    const btnStart = document.querySelector("#btn1");
+    const divStart = document.querySelector("#div1");
+    const name = document.querySelector("#inputName");
+    const age = document.querySelector("#inputAge");
+
+    btnStart.addEventListener("click", () => {
+        var xhr = new XMLHttpRequest();
+        xhr.addEventListener("load", () => {
+            var data = xhr.responseText;
+            divStart.innerHTML = data;
+        })
+        xhr.addEventListener("loadstart", () => {
+            console.log("loadstart");
+            btnStart.textContent="Loading.....";
+            btnStart.setAttribute('disabled', 'disabled');
+        })
+        xhr.addEventListener("onloadend", () => {
+            console.log("onloadend");
+            btnStart.removeAttribute('disabled');
+            btnStart.textContent="Ajax Start";
+        })
+        xhr.addEventListener('timeout', () => {
+            console.log('timeout');
+            divStart.innerHTML = "<h3>伺服器忙碌中請稍後再來</h3>"
+        })
+        const url = "@Url.Content("~/Api/Index")";
+        const params = `?name=${name.value}&age=${age.value}`;
+    /*        xhr.open("GET", `/Api/Index?name=${name.value}&age=${age.value}`);*/
+        xhr.open("GET", url + params);
+        /*xhr.timeout = 3000; */
+        xhr.send();
+    })
+</script>
+}
+

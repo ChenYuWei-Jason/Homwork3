@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "AjexPost";
+}
+
+<h1>AjexPost</h1>
+
+<form method="post" action="~/Api/Index">
+    <div class="form-group">
+        <label for="name1">姓名</label>
+        <input type="text" class="form-control" id="name1" aria-describedby="emailHelp">
+    </div>
+    <div class="form-group">
+        <label for="email">電子郵件</label>
+        <input type="email" class="form-control" id="email">
+    </div>
+    <div class="form-group">
+        <label for="age1">年齡</label>
+        <input type="number" class="form-control" id="age1">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="alert alert-info" id="div1"></div>
+</form>
+
+@section Scripts
+{
+<script>
+
+    const btnSubmit = document.querySelector(".btn");
+    const name = document.querySelector("#name1");
+    const email = document.querySelector("#email");
+    const age = document.querySelector("#age1");
+    const divStart = document.querySelector("#div1");
+
+    btnSubmit.addEventListener('click', (evt) => {
+        evt.preventDefault();
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener("load", () => {
+            var data = xhr.responseText;
+
+            divStart.innerHTML = `<h3>${data}<h3>`;
+        })
+        const params = `name=${name.value}&email=${email.value}&age=${age.value}`;
+        xhr.open('post', `@Url.Content("~/api/Index")`);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(params);
+
+    })
+
+</script>
+
+}

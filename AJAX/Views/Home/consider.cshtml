@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "consider";
+}
+
+<h1>consider</h1>
+<form name="userInfo" method="post" action="~/Api/Index">
+    <div class="form-group">
+        <label for="name1">姓名</label>
+        <input type="text" class="form-control" id="name1" name="Name">
+    </div>
+    <div class="form-group">
+        <label for="email">電子郵件</label>
+        <input type="email" class="form-control" id="email" name="Email">
+    </div>
+    <div class="form-group">
+        <label for="age1">年齡</label>
+        <input type="number" class="form-control" id="age1" name="Age">
+    </div>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="file" name="file">
+        <label class="custom-file-label" for="inputGroupFile01">選擇檔案</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="alert alert-info" id="div1"></div>
+</form>
+
+@section Scripts
+{
+    <script>
+
+    const btnSubmit = document.querySelector(".btn");
+    const divStart = document.querySelector("#div1");
+
+        btnSubmit.addEventListener('click', (evt) => {
+            evt.preventDefault();
+            const formData = new FormData(document.userInfo);
+        fetch('@Url.Content("~/Api/consider")', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => divInfo.innerHTML = data);
+
+
+
+
+
+        @*const xhr = new XMLHttpRequest();
+        xhr.addEventListener("load", () => {
+            var data = xhr.responseText;
+
+            divStart.innerHTML = `<h3>${data}<h3>`;
+        })
+
+        xhr.open('post', `@Url.Content("~/api/consider")`);
+
+        xhr.send(formData);
+
+    })*@
+
+    </script>
+
+}

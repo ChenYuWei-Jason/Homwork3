@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <button onclick="ClickMe()">按我</button>
+</div>
+    <div  id="ASD">
+    </div>
+@section Scripts{
+    <script>
+
+        var emp = {
+            "employees": [
+                { "name": "Tom", "workYears": 3, "salary": 35000 },
+                { "name": "Jack", "workYears": 5, "salary": 40000 },
+                { "name": "Mary", "workYears": 7, "salary": 45000 }
+            ]
+        };
+
+        function ClickMe() {
+            console.log("Hello");
+            $('.display-4').text("Welcom MVC!!")
+
+            var str = "<table>";
+            for (let i = 0; i < emp.employees.length; i++) {
+                str += "<tr>";
+                str += `<td>${emp.employees[i].name}<td>`;
+                str += `<td>${emp.employees[i].workYears}<td>`;
+                str += `<td>${emp.employees[i].salary}<td>`;
+                str += "</tr>";
+            }
+            str += "</table >";
+            document.write(str);
+
+        }
+
+
+
+
+
+
+    </script>
+}
+
+@section Styles{
+    <style>
+        h1 {
+            background-color: aqua;
+        }
+    </style>
+}
+
+
