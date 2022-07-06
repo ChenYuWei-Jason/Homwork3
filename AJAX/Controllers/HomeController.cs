@@ -51,6 +51,11 @@ namespace AJAX.Controllers
         {
             return View();
         }
+
+        public IActionResult Homework2()
+        {
+            return View();
+        }
         public IActionResult AjexPost()
         {
             return View();
@@ -58,6 +63,17 @@ namespace AJAX.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult jQuery()
+        {
+            return View();
+        }
+
+        public IActionResult Partial()
+        {
+            ViewBag.data = "Hello partial!";
+            return PartialView();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

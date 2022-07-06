@@ -56,6 +56,19 @@ namespace AJAX.Controllers
             }
             return Content($"{user.name}你好，你的年紀是{user.age}");
         }
+        public IActionResult CheckName(string name)
+        {
+            
+            var a = _context.Members.FirstOrDefault(c=>c.Name == name);
+            if (a != null)
+            { 
+            return Json("此帳號已註冊");
+            }
+            return Json("此帳號無人使用，可註冊");
+                
+
+        }
+
         public IActionResult GetImageBytes(int id = 1)
         {
             Member member = _context.Members.Find(id);

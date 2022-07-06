@@ -1,0 +1,23 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<form id="addForm">
+    <div class="form-group">
+        <label for="name">姓名</label>
+        <input type="text" class="form-control" id="txtname" name="name" placeholder="輸入姓名">
+   </div>
+        <p id="ANS"></p>
+</form>
+
+@section Scripts{ 
+    <script>
+        const ByName = $("#txtname");
+        ByName.blur(function () {
+            $.get("@Url.Content("~/Api/CheckName")", { "name": ByName.val() },
+                function (data) {
+                    $("#ANS").text(data);
+            })
+        })
+    </script>
+}

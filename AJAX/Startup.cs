@@ -29,9 +29,13 @@ namespace AJAX
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DemoConnection"));
             });
+
+   
             services.AddControllersWithViews();
         }
 
+            
+            
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -49,14 +53,14 @@ namespace AJAX
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseCors();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Address}/{id?}");
+                    pattern: "{controller=Home}/{action=Homework2}/{id?}");
             });
         }
     }
